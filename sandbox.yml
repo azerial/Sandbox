@@ -1,5 +1,8 @@
 ---
 - hosts: localhost
+  module_defaults:
+    ansible.builtin.setup:
+      fact_path: "/srv/git/saltbox/ansible_facts.d"
   vars_files:
     - ['settings.yml', 'defaults/settings.yml.default']
     - ['/srv/git/saltbox/accounts.yml', '/srv/git/saltbox/defaults/accounts.yml.default']
@@ -9,7 +12,7 @@
   roles:
     # Reqs
     - { role: settings, tags: ['settings'] }
-    - { role: pre_tasks, tags: ['pre_tasks'] }
+    - { role: pre_tasks, tags: ['always', 'pre_tasks'] }
     - { role: sanity_check, tags: ['always', 'sanity_check'] }
     # Apps
     - { role: a_train, tags: ['a_train'] }
@@ -33,6 +36,7 @@
     - { role: changedetection, tags: ['changedetection'] }
     - { role: cherry, tags: ['cherry'] }
     - { role: coder, tags: ['coder'] }
+    - { role: code_server, tags: ['code_server'] }
     - { role: comicstreamer, tags: ['comicstreamer'] }
     - { role: comixed, tags: ['comixed'] }
     - { role: dashy, tags: ['dashy'] }
@@ -54,6 +58,7 @@
     - { role: goaccess, tags: ['goaccess'] }
     - { role: gitea, tags: ['gitea'] }
     - { role: glances_web, tags: ['glances-web'] }
+    - { role: gluetun, tags: ['gluetun'] }
     - { role: goplaxt, tags: ['goplaxt'] }
     - { role: gotenberg, tags: ['gotenberg'] }
     - { role: gotify, tags: ['gotify'] }
@@ -86,6 +91,7 @@
     - { role: medusa, tags: ['medusa'] }
     - { role: minecraft, tags: ['minecraft'] }
     - { role: minecraft_bedrock, tags: ['minecraft-bedrock'] }
+    - { role: miniflux, tags: ['miniflux'] }
     - { role: monitorr, tags: ['monitorr'] }
     - { role: moviematch, tags: ['moviematch'] }
     - { role: mqtt, tags: ['mqtt'] }
